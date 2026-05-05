@@ -1,0 +1,27 @@
+/* ═══════════════════════════════════════════
+   ARCHLEARN — RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════ */
+
+@media(max-width:900px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);}
+  .sidebar.mobile-open{transform:translateX(0);}
+  .content{padding:24px 20px 80px;}
+  .header{padding:0 16px;}
+  .grid-2,
+  .pattern-grid,
+  .solid-wall,
+  .pillars-viz,
+  .metric-row{grid-template-columns:1fr 1fr;}
+  .compare-split{grid-template-columns:1fr;}
+  #ai-drawer{width:calc(100vw - 32px);right:16px;}
+}
+
+@media(max-width:580px){
+  .grid-2,
+  .pattern-grid,
+  .solid-wall,
+  .pillars-viz,
+  .metric-row{grid-template-columns:1fr;}
+  .section-title{font-size:24px;}
+  .canvas-3d{height:240px;}
+}

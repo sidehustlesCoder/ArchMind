@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArchLearn — Software Architecture Mastery</title>
+  <meta name="description" content="Learn .NET Architecture and AI Engineering through visual diagrams, real-world analogies, and interactive quizzes."/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <!-- Highlight.js theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/tomorrow-night.min.css"/>
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/tokens.css"/>
+  <link rel="stylesheet" href="css/layout.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/sections.css"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">A</div>
+      <div class="logo-text">Arch<span>Learn</span></div>
+    </div>
+    <div class="track-switcher">
+      <button class="track-btn active-dotnet" id="trackDotnet" onclick="setTrack('dotnet')">.NET Track</button>
+      <button class="track-btn" id="trackAi" onclick="setTrack('ai')">AI Track</button>
+    </div>
+    <div class="sidebar-progress">
+      <div class="progress-label">PROGRESS</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+    <div class="nav-scroll">
+      <!-- .NET Nav -->
+      <div class="nav-group" id="dotnet-nav">
+        <div class="nav-group-label">.NET FOUNDATIONS</div>
+        <div class="nav-item active" id="nav-mvc" onclick="show('mvc','dotnet')">
+          <span class="nav-dot"></span>ASP.NET MVC <span class="nav-badge badge-beginner">Beginner</span>
+        </div>
+        <div class="nav-item" id="nav-oop" onclick="show('oop','dotnet')">
+          <span class="nav-dot"></span>OOP Concepts <span class="nav-badge badge-beginner">Beginner</span>
+        </div>
+        <div class="nav-item" id="nav-solid" onclick="show('solid','dotnet')">
+          <span class="nav-dot"></span>SOLID Principles<span class="nav-badge badge-intermediate">Intermediate</span>
+        </div>
+        <div class="nav-item" id="nav-patterns" onclick="show('patterns','dotnet')">
+          <span class="nav-dot"></span>Design Patterns<span class="nav-badge badge-advanced">Advanced</span>
+        </div>
+        <div class="nav-item" id="nav-microservices" onclick="show('microservices','dotnet')">
+          <span class="nav-dot"></span>Microservices<span class="nav-badge badge-advanced">Advanced</span>
+        </div>
+      </div>
+      <!-- AI Nav -->
+      <div class="nav-group" id="ai-nav" style="display:none">
+        <div class="nav-group-label">AI ENGINEERING</div>
+        <div class="nav-item ai-item" id="nav-llm" onclick="show('llm','ai')">
+          <span class="nav-dot"></span>How LLMs Work <span class="nav-badge badge-beginner">Beginner</span>
+        </div>
+        <div class="nav-item ai-item" id="nav-rag" onclick="show('rag','ai')">
+          <span class="nav-dot"></span>RAG Systems <span class="nav-badge badge-intermediate">Intermediate</span>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">☀</span>&nbsp;<span id="themeLabel">Light</span>
+      </button>
+      <span style="font-family:var(--fm);font-size:9px;color:var(--txt3);">v2.0 Architect</span>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="header">
+      <div class="header-left">
+        <div class="section-indicator" id="secIndicator"></div>
+        <div class="header-breadcrumb" id="breadcrumb"><span>.NET Track</span> / OOP Concepts</div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input class="search-in" placeholder="Search topics…" onkeyup="doSearch(this.value)" id="searchIn"/>
+      </div>
+      <div class="header-actions">
+        <button class="hbtn" onclick="toggleMobile()">☰</button>
+        <button class="hbtn primary" onclick="toggleAI()">✦ AI Ask</button>
+      </div>
+    </header>
+
+    <div class="content" id="mainContent">
+      <!-- Sections are injected here by JS -->
+    </div>
+
+    <!-- Node Detail Overlay -->
+    <div id="node-detail" style="display:none; position:fixed; z-index:1000; background:var(--bg2); border:1px solid var(--brd2); border-radius:12px; padding:20px; width:300px; box-shadow:var(--shadow); pointer-events:all; animation: slideUp 0.3s ease;">
+      <button onclick="this.parentElement.style.display='none'" style="position:absolute; right:10px; top:10px; background:none; color:var(--txt3); font-size:16px;">×</button>
+      <div id="node-detail-title" style="font-family:var(--fh); font-size:18px; font-weight:600; margin-bottom:8px; color:var(--dotnet);">Node Title</div>
+      <div id="node-detail-body" style="font-size:13px; color:var(--txt2); line-height:1.6;">Node description goes here...</div>
+      <div style="margin-top:15px; padding-top:10px; border-top:1px solid var(--brd); font-family:var(--fm); font-size:10px; color:var(--txt3);">ARCHITECT INSIGHT</div>
+    </div>
+  </div>
+
+    <!-- Pattern Deep Dive Modal -->
+    <div id="pattern-modal" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; padding:40px;">
+        <div style="background:var(--bg2); border:1px solid var(--brd2); width:100%; max-width:900px; max-height:90vh; overflow-y:auto; border-radius:16px; position:relative; padding:40px; box-shadow:0 30px 60px rgba(0,0,0,0.5);">
+            <button onclick="document.getElementById('pattern-modal').style.display='none'" style="position:absolute; right:20px; top:20px; background:var(--bg3); border:1px solid var(--brd); color:var(--txt3); width:36px; height:36px; border-radius:50%; cursor:pointer;">×</button>
+            <div id="pm-type" style="font-family:var(--fm); font-size:11px; letter-spacing:0.2em; color:var(--dotnet); margin-bottom:10px;">CREATIONAL</div>
+            <h2 id="pm-title" style="font-family:var(--fh); font-size:32px; font-weight:700; margin-bottom:20px;">Pattern Name</h2>
+            
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+                <div>
+                    <h3 style="font-size:14px; color:var(--txt3); margin-bottom:12px; border-bottom:1px solid var(--brd); padding-bottom:5px;">CORE CONCEPT</h3>
+                    <p id="pm-concept" style="font-size:14px; line-height:1.7; color:var(--txt2); margin-bottom:20px;">Detailed explanation of the pattern intent...</p>
+                    
+                    <h3 style="font-size:14px; color:var(--txt3); margin-bottom:12px; border-bottom:1px solid var(--brd); padding-bottom:5px;">WHEN TO USE</h3>
+                    <ul id="pm-usage" style="font-size:13px; line-height:1.7; color:var(--txt2); padding-left:20px;">
+                        <li>Scenario 1</li>
+                        <li>Scenario 2</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="font-size:14px; color:var(--txt3); margin-bottom:12px; border-bottom:1px solid var(--brd); padding-bottom:5px;">PRODUCTION EXAMPLE (C#)</h3>
+                    <div id="pm-code" style="background:rgba(0,0,0,0.3); border-radius:8px; overflow:hidden;">
+                        <!-- Code goes here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Image Overlay -->
+    <div id="image-overlay" onclick="this.style.display='none'" style="display:none; position:fixed; inset:0; z-index:3000; background:rgba(0,0,0,0.95); cursor:zoom-out; align-items:center; justify-content:center; padding:20px;">
+        <img id="overlay-img" src="" style="max-width:100%; max-height:100%; object-fit:contain; box-shadow:0 0 50px rgba(0,0,0,0.5); border-radius:8px;">
+        <div style="position:absolute; top:20px; right:20px; color:#fff; font-size:24px; font-weight:300;">✕</div>
+    </div>
+
+    <!-- AI ASSISTANT FAB -->
+  <button id="ai-fab" onclick="toggleAI()">✦</button>
+  <div id="ai-drawer">
+    <div class="drawer-head">
+      <div class="drawer-avatar">✦</div>
+      <div>
+        <div class="drawer-title">AI Architect Tutor</div>
+        <div class="drawer-sub">Ask about patterns, code, design decisions</div>
+      </div>
+    </div>
+    <div class="drawer-msgs" id="drawerMsgs">
+      <div class="dmsg bot">Hi! Ask me: "When should I use Saga vs 2PC?", "Explain CQRS read models", "What is the Outbox pattern?", "How does self-attention work?", or anything about OOP, SOLID, patterns, microservices, LLMs, or RAG.</div>
+    </div>
+    <div class="drawer-input-row">
+      <input class="drawer-in" id="drawerIn" type="text" placeholder="Ask an architecture question…" onkeydown="if(event.key==='Enter')sendAI()"/>
+      <button class="drawer-send" onclick="sendAI()">Send</button>
+    </div>
+  </div>
+
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+  <!-- App JS (order matters) -->
+  <script src="js/sections/mvc.js"></script>
+  <script src="js/sections/oop.js"></script>
+  <script src="js/sections/solid.js"></script>
+  <script src="js/sections/patterns.js"></script>
+  <script src="js/sections/microservices.js"></script>
+  <script src="js/sections/llm.js"></script>
+  <script src="js/sections/rag.js"></script>
+  <script src="js/canvas3d.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/ai-drawer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

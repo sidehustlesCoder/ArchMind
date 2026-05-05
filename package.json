@@ -1,0 +1,11 @@
+{
+  "name": "archlearn-platform",
+  "version": "1.0.0",
+  "description": "Premium Software Architecture Mastery Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "author": "",
+  "license": "ISC"
+}

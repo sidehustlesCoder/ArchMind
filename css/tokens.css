@@ -1,0 +1,73 @@
+/* ═══════════════════════════════════════════════
+   ARCHLEARN — DESIGN TOKENS
+   All CSS custom properties (variables).
+   Dark mode is the default; light mode overrides.
+═══════════════════════════════════════════════ */
+
+:root {
+  /* ── Backgrounds ── */
+  --bg:  #0a0b0e;
+  --bg2: #0f1117;
+  --bg3: #161820;
+  --bg4: #1c1f2a;
+
+  /* ── Surfaces & Borders ── */
+  --surface: rgba(255,255,255,0.035);
+  --brd:     rgba(255,255,255,0.07);
+  --brd2:    rgba(255,255,255,0.12);
+
+  /* ── Brand: .NET Track ── */
+  --dotnet:    #f59e0b;
+  --dotnet-lt: #fcd34d;
+  --dotnet-dk: #92400e;
+
+  /* ── Brand: AI Track ── */
+  --ai:    #10b981;
+  --ai-lt: #6ee7b7;
+  --ai-dk: #064e3b;
+
+  /* ── Accent Palette ── */
+  --purple: #a78bfa;
+  --blue:   #60a5fa;
+  --pink:   #f472b6;
+  --cyan:   #22d3ee;
+
+  /* ── Text ── */
+  --txt:  #e2e4ea;
+  --txt2: #8b8fa8;
+  --txt3: #555872;
+
+  /* ── Semantic ── */
+  --good: #10b981;
+  --bad:  #ef4444;
+  --warn: #f59e0b;
+
+  /* ── Typography ── */
+  --fh: 'Fraunces', Georgia, serif;
+  --fb: 'IBM Plex Sans', sans-serif;
+  --fm: 'IBM Plex Mono', monospace;
+
+  /* ── Layout ── */
+  --radius:    10px;
+  --sidebar-w: 272px;
+  --header-h:  56px;
+  --shadow:    0 8px 32px rgba(0,0,0,.55);
+}
+
+/* ── Light Mode Overrides ── */
+[data-theme="light"] {
+  --bg:  #f4f4f0;
+  --bg2: #eeeee9;
+  --bg3: #e8e8e2;
+  --bg4: #ddddd6;
+
+  --surface: rgba(0,0,0,0.03);
+  --brd:     rgba(0,0,0,0.08);
+  --brd2:    rgba(0,0,0,0.14);
+
+  --txt:  #18191f;
+  --txt2: #4a4b5c;
+  --txt3: #8b8c9e;
+
+  --shadow: 0 4px 20px rgba(0,0,0,.1);
+}
