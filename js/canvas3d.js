@@ -9,10 +9,20 @@ const currentScenes = {
     solidCanvas: 'solidCanvas', 
     patternCanvas: 'patternCreational', 
     msCanvas: 'msCanvas',
-    mvcCanvas: 'mvcCanvas'
+    mvcCanvas: 'mvcCanvas',
+    ftCanvas: 'ftCanvas'
 };
 
 const SCENES = {
+  ftCanvas: {
+    nodes: [
+      {l:'Week 1', x:0,   y:120, z:0,    c:'#f59e0b', r:30, d:'Trade-offs.'},
+      {l:'Week 2', x:-120,y:20,  z:60,   c:'#60a5fa', r:24, d:'Foundations.'},
+      {l:'Week 3', x:120, y:20,  z:60,   c:'#60a5fa', r:24, d:'Patterns.'},
+      {l:'Week 4', x:0,   y:-110,z:100,  c:'#10b981', r:34, d:'Distributed.'},
+    ],
+    edges:[[0,1],[1,3],[0,2],[2,3]]
+  },
   mvcCanvas: {
     nodes: [
       {l:'Controller', x:0,   y:120, z:0,    c:'#f59e0b', r:34, d:'Handles requests.'},

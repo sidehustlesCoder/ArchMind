@@ -28,22 +28,27 @@ function setTrack(t) {
   document.getElementById('trackAi').className     = 'track-btn' + (t === 'ai'     ? ' active-ai'     : '');
   document.getElementById('dotnet-nav').style.display = t === 'dotnet' ? '' : 'none';
   document.getElementById('ai-nav').style.display     = t === 'ai'     ? '' : 'none';
-  t === 'dotnet' ? show('mvc', 'dotnet') : show('llm', 'ai');
+  t === 'dotnet' ? show('roadmap', 'dotnet') : show('llm', 'ai');
 }
 
 /* ── Progress ── */
-const visited = new Set(['mvc']);
-const TOTAL   = 7;
+const visited = new Set(['roadmap']);
+const TOTAL   = 8;
 
 function updateProgress() {
   document.getElementById('progressFill').style.width = Math.round((visited.size / TOTAL) * 100) + '%';
 }
 
 /* ── Navigation ── */
+const idMap = { roadmap:'ftCanvas', mvc:'mvcCanvas', oop:'oopCanvas', solid:'solidCanvas', patterns:'patternCanvas', microservices:'msCanvas', llm:'llmCanvas', rag:'ragCanvas' };
+const tracks = {
+    dotnet: ['roadmap', 'mvc', 'oop', 'solid', 'patterns', 'microservices'],
+    ai: ['llm', 'rag']
+};
 const SECTION_LABELS = {
   oop: 'OOP Concepts', solid: 'SOLID Principles',
   patterns: 'Design Patterns', microservices: 'Microservices',
-  llm: 'How LLMs Work', rag: 'RAG Systems', mvc: 'MVC Architecture'
+  llm: 'How LLMs Work', rag: 'RAG Systems', mvc: 'MVC Architecture', roadmap: '8 Week Plan'
 };
 
 function zoomImg(src) {
@@ -140,6 +145,7 @@ function show(id, track) {
     hljs.highlightAll();
     if (id === 'solid') switchSolid('S');
     if (id === 'patterns') switchPatternCat('creational');
+    if (id === 'roadmap') switchWeek(1);
   }
 
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
@@ -162,6 +168,37 @@ function show(id, track) {
   updateProgress();
   document.querySelector('.content').scrollTop = 0;
   requestAnimationFrame(() => window.initCanvas && window.initCanvas(id));
+}
+
+/* ── Fast Track Detail ── */
+/* ── Roadmap Topic Switch ── */
+function switchFT(id) {
+  const area = document.getElementById('ft-content-area');
+  if (!area || !window.FT_PAGES) return;
+  document.querySelectorAll('#roadmap .track-switcher:nth-child(2) .track-btn').forEach(b => b.classList.remove('active-dotnet'));
+  document.getElementById('ft-' + id)?.classList.add('active-dotnet');
+  area.innerHTML = window.FT_PAGES[id];
+  if (id === 'cap') switchCAP('sql');
+}
+
+/* ── CAP Implementation Switch ── */
+function switchCAP(id) {
+  const area = document.getElementById('cap-impl-area');
+  if (!area || !window.CAP_IMPL) return;
+  document.querySelectorAll('#roadmap .track-switcher:nth-child(4) .track-btn').forEach(b => b.classList.remove('active-dotnet'));
+  document.getElementById('cap-' + id)?.classList.add('active-dotnet');
+  area.innerHTML = window.CAP_IMPL[id];
+  hljs.highlightAll();
+}
+
+/* ── Roadmap Week Switch ── */
+function switchWeek(num) {
+  const area = document.getElementById('week-content-area');
+  if (!area || !window.WEEK_DATA) return;
+  document.querySelectorAll('#roadmap > .track-switcher .track-btn').forEach(b => b.classList.remove('active-dotnet'));
+  document.getElementById('btn-w' + num)?.classList.add('active-dotnet');
+  area.innerHTML = window.WEEK_DATA[num];
+  if (num === 1) switchFT('cap');
 }
 
 /* ── Theme ── */
@@ -205,6 +242,6 @@ function switchSolid(letter) {
     updateProgress();
   } catch (e) {}
 
-  // Render MVC (default section) into DOM
-  show('mvc', 'dotnet');
+  // Render Roadmap (default section) into DOM
+  show('roadmap', 'dotnet');
 })();

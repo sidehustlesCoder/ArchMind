@@ -39,8 +39,12 @@
     <div class="nav-scroll">
       <!-- .NET Nav -->
       <div class="nav-group" id="dotnet-nav">
+        <div class="nav-group-label">STUDY ROADMAP</div>
+        <div class="nav-item active" id="nav-roadmap" onclick="show('roadmap','dotnet')">
+          <span class="nav-dot"></span>8 Week Architect Plan <span class="nav-badge badge-advanced">MASTER</span>
+        </div>
         <div class="nav-group-label">.NET FOUNDATIONS</div>
-        <div class="nav-item active" id="nav-mvc" onclick="show('mvc','dotnet')">
+        <div class="nav-item" id="nav-mvc" onclick="show('mvc','dotnet')">
           <span class="nav-dot"></span>ASP.NET MVC <span class="nav-badge badge-beginner">Beginner</span>
         </div>
         <div class="nav-item" id="nav-oop" onclick="show('oop','dotnet')">
@@ -162,6 +166,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
   <!-- App JS (order matters) -->
+  <script src="js/sections/roadmap.js"></script>
   <script src="js/sections/mvc.js"></script>
   <script src="js/sections/oop.js"></script>
   <script src="js/sections/solid.js"></script>
